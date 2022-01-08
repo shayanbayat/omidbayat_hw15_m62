@@ -1,0 +1,71 @@
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title float-left">دستگاه ها</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0" style="height: 300px;">
+            <%- include("./partials/deviceInfo") %>
+            <table class="table table-head-fixed text-center">
+                <thead>
+                <tr>
+                    <th>نام</th>
+                    <th>توکن</th>
+                    <th>دمای کنترلی</th>
+                    <th>رطوبت کنترلی</th>
+                    <th>هیتر</th>
+                    <th>فن</th>
+                    <th>روشنایی</th>
+                    <th>امکانات</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%if (typeof device != 'undefined'){%>
+                <%for(let i =0 ; i<device.length; i++){%>
+                    <tr>
+                        <td><%= device[i].name%></td>
+                        <td><%= device[i].token%></td>
+                        <td><%= device[i].TControl%></td>
+                        <td><%= device[i].HControl%></td>
+                        <td><%= device[i].HitterControl == 'off'?'خاموش':'روشن'%></td>
+                        <td><%= device[i].FanControl == 'off'?'خاموش':'روشن'%></td>
+                        <td><%= device[i].LightControl == 'off'?'خاموش':'روشن'%></td>
+                            <td>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">حذف</button>
+                                <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">آیا از حذف مطمعن هستید</h4>
+                                                <button type="button" class="close float-right" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/delete" method="post">
+
+                                                    <input type="text" name="token" class="d-none" value="<%= device[i].token%>">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">خیر</button>
+                                                    <button class="btn btn-danger">بله</button>
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                    </tr>
+
+                <%}%>
+                <%}%>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<button type="button" id="iddddd" onclick="name" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
